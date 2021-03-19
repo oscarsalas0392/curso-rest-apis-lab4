@@ -1,0 +1,30 @@
+# docker-compose -f data-playground.yml up -d
+version: "3.4"
+services:
+
+  adventure-works-db:
+    image: stvansolano/adventure-works:latest
+    environment:
+      SA_PASSWORD: "Password.123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+
+#  redis:
+#    image: redis:4.0.8-alpine
+#    ports:
+#      - target: 6379
+#        published: 6379
+#        protocol: tcp
+#        mode: ingress
+#    volumes:
+#      - "~/data/${STACK_NAME}/redis:/data"
+
+#  code-server:
+#    image: stvansolano/code-server:latest
+#    ports:
+#      - "8080:8080"
+#      - "8443:8443"
+#
+#    volumes:
+#      - "$PWD/:/home/playground"

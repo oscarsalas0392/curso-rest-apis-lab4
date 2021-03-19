@@ -1,0 +1,28 @@
+
+name: Docker Hub - Build images 
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+    - '.github/workflows/docker-github-action.yml'
+    - 'src/DotNetWebApi/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      env:
+        username: stvansolano
+        image-name: aspnet-webapi
+        unique-tag: ${{ github.sha }}
+      run: |
+        docker build -f src/DotNetWebApi/Dockerfile "src" -t $username/$image-name:v1
+        echo 'Version:'
+        echo $version
+        echo 'Unique tag:'
+        echo $unique-tag
